@@ -6,5 +6,6 @@ import { StatesController } from './states.controller';
   imports: [HttpModule],
   controllers: [StatesController],
   providers: [StatesService],
+  exports: [StatesService]
 })
 export class StatesModule {}
