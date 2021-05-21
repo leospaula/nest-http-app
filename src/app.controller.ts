@@ -1,17 +1,14 @@
 import { Controller, Get, Logger, Param } from '@nestjs/common';
-import { ClientProxy, Client, Transport } from '@nestjs/microservices';
+import { ClientProxy, Client } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
+import { natsConfig } from './nats.config';
 
 @Controller()
 export class AppController {
   logger = new Logger('AppController');
 
-  @Client({
-    transport: Transport.NATS,
-    options: {
-      url: 'nats://localhost:4222',
-    },
-  })
+  @Client(natsConfig)
+
   client: ClientProxy;
 
   @Get('estados')
@@ -34,6 +31,7 @@ export class AppController {
   }
 
   async onModuleInit() {
+    console.log('Module init')
     await this.client.connect();
     console.log("Nats connected!");
   }
