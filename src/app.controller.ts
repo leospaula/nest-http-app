@@ -31,7 +31,6 @@ export class AppController {
   }
 
   async onModuleInit() {
-    console.log('Module init')
     await this.client.connect();
     console.log("Nats connected!");
   }
